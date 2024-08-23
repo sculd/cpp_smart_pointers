@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/junlim/projects/cpp_smart_ptrs/buildc",
+  "command": "/usr/bin/c++ -g -o CMakeFiles/cpp_smart_ptrs.dir/main.cpp.o -c /home/junlim/projects/cpp_smart_ptrs/main.cpp",
+  "file": "/home/junlim/projects/cpp_smart_ptrs/main.cpp",
+  "output": "CMakeFiles/cpp_smart_ptrs.dir/main.cpp.o"
+}
+]
