@@ -41,6 +41,14 @@ std::ostream& operator<<(std::ostream& os, const A& a)
     return os;
 }
 
+class B {
+public:
+    int value_;
+    B(int value): value_(value) {
+        std::cout << "B(" << value_ << ") is created" << std::endl;
+    }
+};
+
 void thrower() {
   // 예외를 발생시킴!
   throw 1;
@@ -58,12 +66,28 @@ void do_something() {
 }
 
 int main(int argc, char **argv) {
-    do_something();
+    shared_ptr_impl<A> sa1(new A(1));
+    std::cout << "sa1.use_count(): " << sa1.use_count() << std::endl;
+    shared_ptr_impl<A> sa2(sa1);
+    std::cout << "sa1.use_count(): " << sa1.use_count() << std::endl;
+    std::cout << "sa2.use_count(): " << sa2.use_count() << std::endl;
 
-    unique_ptr_impl<A> ua;
-
-    shared_ptr_impl<A> sa(new A(2));
-    std::cout << sa.count_ << std::endl;
+    shared_ptr_impl<A> saa1(new A(2));
+    std::cout << "saa1.use_count(): " << saa1.use_count() << std::endl;
+    shared_ptr_impl<A> saa2;
+    saa2 = saa1;
+    std::cout << "saa1.use_count(): " << saa1.use_count() << std::endl;
+    std::cout << "meaningless duplicated assignment" << std::endl;
+    saa2 = saa1;
+    std::cout << "saa1.use_count(): " << saa1.use_count() << std::endl;
+    std::cout << "assignment with another sa" << std::endl;
+    saa2 = sa1;
+    std::cout << "saa1.use_count(): " << saa1.use_count() << std::endl;
+    std::cout << "sa1.use_count(): " << sa1.use_count() << std::endl;
+    saa2 = saa2;
+    std::cout << "saa1.use_count(): " << saa1.use_count() << std::endl;
+    saa2 = saa2;
+    std::cout << "saa1.use_count(): " << saa1.use_count() << std::endl;
 
     return 0;
 }
